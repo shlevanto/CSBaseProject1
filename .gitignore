@@ -2,7 +2,7 @@
 workspace*
 
 # Django stuff
-__pycache__
+CSBaseProject1/CSBaseProject1/__pycache__/
 
 # database
 db.sqlite3
