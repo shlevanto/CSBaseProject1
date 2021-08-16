@@ -1,0 +1,41 @@
+<body>
+  {% if my_messages %}
+  <ul>
+    {% for m in my_messages %}
+      <li>{{m.sent_date }} </br> {{ m.message_text }} </br> From: {{ m.sender }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %} 
+    <p>You have no messages.</p>
+  {% endif %}
+  
+  <!--
+  <ul>
+    {% for user in all_users %}
+    <li>{{ user.username }}, {{ user.password }}</li>
+    {% endfor %}
+  -->
+    </li>
+  </ul>
+  <form action="send/", method="POST">
+    <span>To:</span><br/>
+    
+    <select name="to">
+      {% for user in all_users %}
+        <option value="{{ user.username }}">{{ user.username}}</option>
+      {% endfor %}
+    </select>
+
+    <select name="from">
+      {% for user in all_users %}
+        <option value="{{ user.username }}">{{ user.username}}</option>
+      {% endfor %}
+    </select>
+
+    <br/>
+      <span>Message:</span><br/>
+      <input type="text" name="message"/>
+      <br/>
+      <input type="submit" value="Send"/>
+    </form>
+</body>
