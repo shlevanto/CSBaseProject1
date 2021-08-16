@@ -1,1 +1,8 @@
+# VSCode workspace file
 workspace*
+
+# Django stuff
+__pycache__
+
+# database
+db.sqlite3
