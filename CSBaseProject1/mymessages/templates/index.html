@@ -40,4 +40,16 @@
       <input type="submit" name="action" value="Send"/>
       <input type="submit" name="action" value="Character Count">
     </form>
+  </br>
+  <form action="friend/", method="GET">
+    <span>Friend:</span><br/>
+    <select name="friend">
+      {% for user in all_users %}
+        <option value="{{ user.username }}">{{ user.username}}</option>
+      {% endfor %}
+    </select>
+    <br/>
+    <br/>
+    <input type="submit" value="Get Info">
+    </form>
 </body>

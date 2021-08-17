@@ -5,20 +5,22 @@ from django.contrib.auth import get_user_model
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection  # unsafe
+from django.contrib.auth.decorators import login_required
 
 
 from .models import Message
 
 # Create your views here.
 
-
+#@login_required
 def index(request):
     my_messages = Message.objects.all()
     
     # get list of all users
-    # this also shows tha admin username!
     all_users = get_user_model().objects.all()
 
+    # get list of friends ie. those users that have sent me messages
+    
     template = loader.get_template('index.html')
     context = {
         'my_messages': my_messages,
@@ -63,3 +65,10 @@ def sendView(request):
         message_length = len(new_message)
         char_count = f'<html><body>The character count for {new_message} is {message_length}.</body></html>'
         return HttpResponse(char_count)
+
+    
+# Vulnerability 4. Exposure of data
+# you should only be able to see the e-mail of those who sent you messages
+# but because we use GET request, you can use a modified url
+def friendView(request):
+    return HttpResponse('<html><body>Info of my friend</body></html>')
