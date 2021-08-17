@@ -34,23 +34,32 @@ def sendView(request):
     new_message = request.POST.get('message')
     sender = request.POST.get('from')
     receiver = request.POST.get('to')
-    
+    action = request.POST.get('action')
+
     # Vulnerability 2. SQL Injection
     # this is an unsafe way of handling database queries, 
     # it makes the application vulnerable to SQL injection
     
-    with connection.cursor() as cursor:
-        cursor.executescript("INSERT INTO mymessages_message (receiver, sender, sent_date, message_text) VALUES ('{0}', '{1}', '{2}', '{3}')".format(sender, receiver, datetime.now(), new_message))
-    
-    # using Django models to handle the database would be safe
-    # also using cursor.execute only allows to execute on SQL command
+    if action == 'Send':
+        with connection.cursor() as cursor:
+            cursor.executescript("INSERT INTO mymessages_message (receiver, sender, sent_date, message_text) VALUES ('{0}', '{1}', '{2}', '{3}')".format(sender, receiver, datetime.now(), new_message))
 
-    '''
-    Message.objects.create(
-        receiver=receiver,
-        sender=sender,
-        message_text=new_message,
-        sent_date=datetime.now()
-        )
-    '''
-    return redirect('/')
+        # using Django models to handle the database would be safe
+        # also using cursor.execute only allows to execute on SQL command
+
+        '''
+        Message.objects.create(
+            receiver=receiver,
+            sender=sender,
+            message_text=new_message,
+            sent_date=datetime.now()
+            )
+        '''
+        return redirect('/')
+
+    else:
+        # Vulnerability 3. XSS
+        # The character count is passed as a string
+        message_length = len(new_message)
+        char_count = f'<html><body>The character count for {new_message} is {message_length}.</body></html>'
+        return HttpResponse(char_count)

@@ -19,13 +19,14 @@
   </ul>
   <form action="send/", method="POST">
     <span>To:</span><br/>
-    
     <select name="to">
       {% for user in all_users %}
         <option value="{{ user.username }}">{{ user.username}}</option>
       {% endfor %}
     </select>
-
+    <br/>
+    
+    <span>From:</span><br/>
     <select name="from">
       {% for user in all_users %}
         <option value="{{ user.username }}">{{ user.username}}</option>
@@ -36,6 +37,7 @@
       <span>Message:</span><br/>
       <input type="text" name="message"/>
       <br/>
-      <input type="submit" value="Send"/>
+      <input type="submit" name="action" value="Send"/>
+      <input type="submit" name="action" value="Character Count">
     </form>
 </body>
