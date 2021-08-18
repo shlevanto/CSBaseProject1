@@ -12,7 +12,7 @@ from .models import Message
 
 # Create your views here.
 
-#@login_required
+@login_required
 def index(request):
     my_messages = Message.objects.all()
     

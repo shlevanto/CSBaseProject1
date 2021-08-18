@@ -127,3 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Where does login lead to?
 LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "/" #
