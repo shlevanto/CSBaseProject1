@@ -9,12 +9,7 @@
     <p>You have no messages.</p>
   {% endif %}
   
-  <!--
-  <ul>
-    {% for user in all_users %}
-    <li>{{ user.username }}, {{ user.password }}</li>
-    {% endfor %}
-  -->
+
     </li>
   </ul>
   <form action="send/", method="POST">
@@ -26,13 +21,6 @@
     </select>
     <br/>
     
-    <span>From:</span><br/>
-    <select name="from">
-      {% for user in all_users %}
-        <option value="{{ user.username }}">{{ user.username}}</option>
-      {% endfor %}
-    </select>
-
     <br/>
       <span>Message:</span><br/>
       <input type="text" name="message"/>
@@ -41,17 +29,10 @@
       <input type="submit" name="action" value="Character Count">
     </form>
   </br>
-  <form action="friend/", method="GET">
-    <span>Friend:</span><br/>
-    <select name="friend">
-      {% for user in all_users %}
-        <option value="{{ user.username }}">{{ user.username}}</option>
-      {% endfor %}
-    </select>
-    <br/>
-    <br/>
-    <input type="submit" value="Get Info">
-    </form>
+  <form action="profile/", method="GET">
+    <input type="hidden" name="user" value="{{ user }}"/>
+    <input type="submit" value="Show my profile"/>
+  </form>
 
     <br/>
   
