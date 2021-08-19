@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 
-
 from .models import Message
 
 # Create your views here.
@@ -44,7 +43,11 @@ def sendView(request):
 
     if action == 'Send':
         with connection.cursor() as cursor:
-            cursor.executescript("INSERT INTO mymessages_message (receiver, sender, sent_date, message_text) VALUES ('{0}', '{1}', '{2}', '{3}')".format(receiver, sender, datetime.now(), new_message))
+            cursor.executescript(
+                '''INSERT INTO mymessages_message
+                (receiver, sender, sent_date, message_text)
+                VALUES ('{0}', '{1}', '{2}', '{3}')'''
+                .format(receiver, sender, datetime.now(), new_message))
 
         # using Django models to handle the database would be safe
         # also using cursor.execute only allows to execute on SQL command
@@ -70,6 +73,7 @@ def sendView(request):
 # you should only be able to see your own user profile
 # but because we use GET request, you can set url parameters freely
 # the fix is to use request.user as a parameter for post
+
 
 def profileView(request):
     user = request.GET.get('user')

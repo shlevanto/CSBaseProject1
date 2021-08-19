@@ -2,16 +2,13 @@
   {% if my_messages %}
   <ul>
     {% for m in my_messages %}
-      <li>{{m.sent_date }} </br> {{ m.message_text }} </br> From: {{ m.sender }}</a></li>
+      <li>{{m.sent_date }} <br/> {{ m.message_text }} <br/> From: {{ m.sender }}</a></li>
     {% endfor %}
   </ul>
   {% else %} 
     <p>You have no messages.</p>
   {% endif %}
   
-
-    </li>
-  </ul>
   <form action="send/", method="POST">
     <span>To:</span><br/>
     <select name="to">
@@ -27,8 +24,8 @@
       <br/>
       <input type="submit" name="action" value="Send"/>
       <input type="submit" name="action" value="Character Count">
-    </form>
-  </br>
+  </form>
+  <br/>
   <form action="profile/", method="GET">
     <input type="hidden" name="user" value="{{ user }}"/>
     <input type="submit" value="Show my profile"/>
