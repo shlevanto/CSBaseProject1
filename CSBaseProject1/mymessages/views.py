@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth import get_user_model
 from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 
@@ -28,9 +27,10 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-# Vulnerability 1. Cross Site Request Forgery
+# Vulnerability Cross Site Request Forgery
 # During development the send message -functionality csrf requirement was bypassed and it had not been fixed
-@csrf_exempt
+
+@login_required
 def sendView(request):
     new_message = request.POST.get('message')
     sender = request.user
@@ -69,10 +69,10 @@ def sendView(request):
         char_count = f'<html><body>The character count for {new_message} is {message_length}.</body></html>'
         return HttpResponse(char_count)
 
-# Vulnerability 4. Exposure of data
+# Vulnerability 4. Broken Access Control
 # you should only be able to see your own user profile
 # but because we use GET request, you can set url parameters freely
-# the fix is to use request.user as a parameter for post
+# the fix is to use request.user as a parameter for a POST request
 
 
 def profileView(request):

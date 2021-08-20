@@ -10,6 +10,7 @@
   {% endif %}
   
   <form action="send/", method="POST">
+    {% csrf_token %}
     <span>To:</span><br/>
     <select name="to">
       {% for user in all_users %}
