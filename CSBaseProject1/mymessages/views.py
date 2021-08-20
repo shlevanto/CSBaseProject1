@@ -53,7 +53,7 @@ def sendView(request):
         return HttpResponse(char_count)
 
 def profileView(request):
-    user = request.user #GET.get('user')
+    user = request.GET.get('user') 
     template = loader.get_template('profile.html')
 
     def dictfetchall(cursor):
