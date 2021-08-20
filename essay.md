@@ -31,4 +31,6 @@ FLAW 3: SQL Injection
 
 FLAW 4: XSS
 
-FLAW 5: Broken Access ControlAdd source link to each flaw if appropriate. Ideally, the link should have the format https://urldomain/repo/file.py#L42 (Line 42 in file.py
+FLAW 5: Broken Access Control
+
+Add source link to each flaw if appropriate. Ideally, the link should have the format https://urldomain/repo/file.py#L42 (Line 42 in file.py
