@@ -7,6 +7,10 @@ The website is a simple app where one can create a user profile and send message
 The files include a database db.sqlite3 with four users if you want to try out the functionality.
 
 admin:admin
+
 bob:squarepants
+
 alice:redqueen
+
 patrick:starf1sh
+
