@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Message
 
-# Create your views here.
-
 @login_required
 def index(request):
     user = request.user
