@@ -15,7 +15,6 @@ def index(request):
     user = request.user
     my_messages = Message.objects.filter(receiver=user)
 
-    # get list of all users
     all_users = get_user_model().objects.all()
 
     template = loader.get_template('index.html')
@@ -26,20 +25,12 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-
-# Vulnerability Cross Site Request Forgery
-# During development the send message -functionality csrf requirement was bypassed and it had not been fixed
-
 @login_required
 def sendView(request):
     new_message = request.POST.get('message')
     sender = request.user
     receiver = request.POST.get('to')
     action = request.POST.get('action')
-
-    # Vulnerability 2. SQL Injection
-    # this is an unsafe way of handling database queries, 
-    # it makes the application vulnerable to SQL injection
 
     if action == 'Send':
         with connection.cursor() as cursor:
@@ -49,34 +40,22 @@ def sendView(request):
                 VALUES ('{0}', '{1}', '{2}', '{3}')'''
                 .format(receiver, sender, datetime.now(), new_message))
 
-        # using Django models to handle the database would be safe
-        # also using cursor.execute only allows to execute on SQL command
-
-        '''
-        Message.objects.create(
-            receiver=receiver,
-            sender=sender,
-            message_text=new_message,
-            sent_date=datetime.now()
-            )
-        '''
         return redirect('/')
 
     else:
-        # Vulnerability 3. XSS
-        # The character count is passed as a string
         message_length = len(new_message)
-        char_count = f'<html><body>The character count for {new_message} is {message_length}.</body></html>'
+        char_count = f'''
+        <html>
+          <body>
+            <p>The character count for {new_message} is {message_length}.</p>
+            <p><a href="/">Back</a></p>
+          </body>
+        </html>'''
+        
         return HttpResponse(char_count)
 
-# Vulnerability 4. Broken Access Control
-# you should only be able to see your own user profile
-# but because we use GET request, you can set url parameters freely
-# the fix is to use request.user as a parameter for a POST request
-
-
 def profileView(request):
-    user = request.GET.get('user')
+    user = request.user #GET.get('user')
     template = loader.get_template('profile.html')
 
     def dictfetchall(cursor):
