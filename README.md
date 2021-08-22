@@ -16,7 +16,7 @@ Clone the repository to your machine and locate the manage.py file. Start the ap
 
 ``` python manage.py runserver ```
 
-Open your browser and go to [](localhost:8000).
+Open your browser and go to [localhost:8000](localhost:8000).
 
 You can log in using any one of these user accounts:
 
