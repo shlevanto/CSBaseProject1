@@ -4,15 +4,26 @@ This is a course project for University of Helsinki Cyber Security Base course. 
 
 The vulnerabilities and fixes are described in the [essay.md](/essay.md) file.
 
+## Description of the app
+
 The website is a simple app where one can create a user profile and send messages to other users. 
 
 The files include a database db.sqlite3 with four users if you want to try out the functionality.
 
-admin:admin
+## Installation
+
+Clone the repository to your machine and locate the manage.py file. Start the appliction using
+
+``` python manage.py runserver ```
+
+Open your browser and go to [](localhost:8000).
+
+You can log in using any one of these user accounts:
 
 bob:squarepants
 
 alice:redqueen
 
 patrick:starf1sh
+
 
