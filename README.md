@@ -11,6 +11,8 @@ The website is a simple app where one can create a user profile and send message
 The files include a database db.sqlite3 with four users if you want to try out the functionality.
 
 ## Installation
+You need to have Python and Django installed to run this application
+``` pip install django```
 
 Clone the repository to your machine and locate the manage.py file. Start the appliction using
 
